@@ -47,11 +47,6 @@ function addNewButton(){
 
 
 function addButton(passActor){
-
-	if (passActor.length === 0){
-		alert("Please enter an actor");
-		return;
-	}
 	var b = $("<button>");
 	b.addClass("actors");
 	b.data("data-actor-name", passActor);
@@ -66,7 +61,6 @@ function addButton(passActor){
 function getActorGiphy(){
 	// gets the giphy api json document for the selected 
 	var actorToGet  = $(this).data("data-actor-name");
-
 	var passString = $(this).attr("data-actor-name");
 	var passURL = "https://api.giphy.com/v1/gifs/search?api_key="+apiKey+"&q="+actorToGet;
 	var holdTbl = "";
@@ -76,21 +70,25 @@ function getActorGiphy(){
         method: "GET"
       }).done(function(response){
       // loop thru the data
-      // clears showGiph group
-      $("#showGiphs").empty()
 	      for (var img=0;img < response.data.length; img++){
-	      	// creates img div and appends it to the showGipsh id
-	      	var newImg =$("<img>");
-	      	 newImg.attr("src",response.data[img].images.fixed_width_still.url);
-	      	 newImg.data("data-state", "still");
-	      	 newImg.attr("class", "col-lg-4 show-pict");
-	      //$('#pictTable tbody:last-child').append(holdTbl);
-	      $("#showGiphs").append(newImg);
-	  	}
-	      $(document).on("click", ".show-pict", makeShake);
+	      	// puts 2 sets of images onto 1 row.
+	      	// when modulus ne 0, then do nothing..else get the image and 1 minus image.
+	      	//
+	      		var holdImt = img-1;
+	      	if (img%2 != 0){
+	      		holdImt = img-1;
+	      		holdTbl = holdTbl + "<tr><td>"+holdImt+"<img class='show-pict' src='" + response.data[img-1].images.fixed_width_still.url + "' data-state='still'></td><td>"+img+"<img class='show-pict' src='" + response.data[img].images.fixed_width_still.url +"' data-state='still'></td></tr>";
+	      	} else if (img === response.data.length - 1){
+	      		console.log(img)
+	      		holdImt = img-1
+	     		holdTbl = holdTbl + "<tr><td>"+img+"<img class='show-pict' src='" + response.data[img-1].images.fixed_width_still.url + "' data-state='still'></td></tr>";
+	      	}// end
+	      }// end for
+	      $('#pictTable tbody:last-child').append(holdTbl);
 
       });
       // binding the makeShake method to the new element.
+      $(document).on("click", ".show-pict", makeShake);
 
 
  // <img src="https://media1.giphy.com/media/3o85xkQpyMlnBkpB9C/200_s.gif" data-still="https://media1.giphy.com/media/3o85xkQpyMlnBkpB9C/200_s.gif" data-animate="https://media1.giphy.com/media/3o85xkQpyMlnBkpB9C/200.gif" data-state="still" class="gif">

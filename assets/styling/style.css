@@ -1,5 +1,9 @@
 body{
-	background-color: green;
+	/*background-color: green;*/
+	background-image: url("../images/hollywood.jpg");
+	background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
 }
  button,
     div,
