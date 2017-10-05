@@ -12,11 +12,25 @@
 
 <!-- needed for jquery -->
  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+ <!-- <script src="https://code.jquery.com/jquery.caption.js" type="text/javascript"></script> -->
 <!-- end needed for jquery -->
 
 <!-- external js file -->
 <script src="assets/script/app.js"></script>
 <!-- -->
+
+<style>
+
+#text {
+  z-index: 100;
+  position: absolute;
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+  left: 150px;
+  top: 350px;
+}
+</style>
 </head>
 <body>
 <div class="container-fluid">
@@ -31,31 +45,27 @@
 
 		
 
-	<div class="row" id="giphy-row">
-		<div class="col-lg-8" id="showGiphs">
-			<!-- <table class="table table-sm" id="pictTable">
-			  <tbody>
-			  </tbody>
-			</table> -->
-
+	<div class="row no-gutters" id="giphy-row">
+		<div class="col-lg-8" id="showGiphs" style="background-color: #D39898">
+			
 		</div>
 
 		<div  class="col-lg-3">
 			<div class="card" style="width: 20rem;">
-	<!-- 		  <img class="card-img-top" src="..." alt="Card image cap">
- -->	
+	
 	
 			  <div class="card-body">
 				<h4 class="card-title">Add a New Actor</h4>
-			<div class="form-group">
+				<div class="form-group">
 				    <input type="input" id="newActor"  class="form-control" placeholder="Enter an Actor"></input>
-			  </div>
+			  	</div>
 			    <a href="#" class="btn btn-primary" id="actorButton">Add</a>
 			  </div>
 
 		</div>
 
 
+	</div>
 </div>
 
 <!-- for jquery -->
