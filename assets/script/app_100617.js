@@ -1,7 +1,6 @@
 $( document ).ready(function(){
 
 
-	var numTimesDone = 0;
 // array of actors
 
 var apiKey = "PK7TLz7rD84NTgZBCgWhmLAiMU2FHjLk";
@@ -68,6 +67,7 @@ function getActorGiphy(){
 	// gets the giphy api json document for the selected 
 	var actorToGet  = $(this).data("data-actor-name");
 
+	var passString = $(this).attr("data-actor-name");
 	var passURL = "https://api.giphy.com/v1/gifs/search?api_key="+apiKey+"&q="+actorToGet;
 	var holdTbl = "";
 	$("#pictTable tbody").empty();
@@ -78,30 +78,30 @@ function getActorGiphy(){
       // loop thru the data
 	  // clears showGiph group
 	  console.log(response.data)
-	  $("#showGiphs").empty();
+      $("#showGiphs").empty();
 	      for (var img=0;img < response.data.length; img++){
-	      		// creates img div and appends it to the showGiphs id
+	      	// creates img div and appends it to the showGipsh id
 				 var newDiv =$("<div>");
+				//  newDiv.css("border", "solid 1px blue");
 				 newDiv.css("display", "inline");
 				 newDiv.css("position", "absolue");
 				 newDiv.css("left", 0);
 				 // creating dynamic id based upon img value
 				 newDiv.attr("id", "img-"+img);
-   			     newDiv.addClass("col-lg-1 eachGiphs");
-				  $("#showGiphs").append(newDiv);
-
-
-				//  // creating new img object to append to the dynamic id
+				  newDiv.addClass("col-lg-1 eachGiphs");
+				 
+				 $("#showGiphs").append(newDiv);
+				 // creating new img object to append to the dynamic id
 				 var newImg =$("<img>");
 				 newImg.attr("id", "actorImg"+img);
 				 newImg.attr("src",response.data[img].images.fixed_width_still.url);
-				 newImg.data("data-state", "still");
-				 newImg.data("data-animate", response.data[img].images.preview_gif.url);   
-				 newImg.data("data-still", response.data[img].images.fixed_width_still.url);   
-				 newImg.addClass("show-pict");
-				 $("#img-"+img).append(newImg);
+				newImg.data("data-state", "still");
+				newImg.data("data-animate", response.data[img].images.preview_gif.url);   
+				newImg.data("data-still", response.data[img].images.fixed_width_still.url);   
+				newImg.addClass("show-pict");
+				 // creates individual id tab for image.
+				  $("#img-"+img).append(newImg);
 				 
-				 // creates individual p element for the image to show the rating
 				var p = $("<p>");
 				// adding css to load the text onto the image...
 				p.css("display", "inline");
@@ -109,7 +109,7 @@ function getActorGiphy(){
 				p.css("background-color", "silver");
 				p.css("color", "red");
 				p.css("left", 0);
-				p.css("top", 25);
+				p.css("top", 15);
 				p.html("<b>Rating: " + response.data[img].rating+"</b>");
 				$("#img-"+img).append(p);
 
@@ -118,22 +118,24 @@ function getActorGiphy(){
 
       });
 
-	     
+	     $(document).on("click", ".show-pict", makeShake);
+
 
  }// end fcn getActorGiphy
 
 function makeShake(){
+	alert("xx")
 	console.log($(this).attr("src"));
 	console.log($(this).data("data-animate"));
 	console.log($(this).data("data-state"))
-	// //making image inimated vs static
-	// // when clicked on..
-	// // if still, then 
-	// // 1. set src to inimaged 
-	// // 2. set data-state to animate
-	// // if animaged, then
-	// // 1. set srs to still
-	// // 2. set data-state to still
+	//making image inimated vs static
+	// when clicked on..
+	// if still, then 
+	// 1. set src to inimaged 
+	// 2. set data-state to animate
+	// if animaged, then
+	// 1. set srs to still
+	// 2. set data-state to still
 	if ($(this).data("data-state") === "still"){
 		$(this).attr("src",$(this).data("data-animate"));
 		$(this).data("data-state","animate");
@@ -149,5 +151,4 @@ $("#actorButton").on("click",addNewButton);
 
 $(".actors").on("click",getActorGiphy);
 
-$(document).on("click", ".show-pict", makeShake);
 })// end document ready
