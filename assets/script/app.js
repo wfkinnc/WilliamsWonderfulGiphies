@@ -15,12 +15,12 @@ actors[5] = 'Christopher George';
 actors[6] = 'Yul Brenner';
 actors[7] = 'Steve McQueen';
 actors[8] = 'Christoper Reeves';
-actors[9] = 'John Wayne';
-actors[10] = 'Bill Pullman';
-actors[11] = 'John Wayne';
-actors[12] = 'Bill Pullman';
-actors[13] = 'John Wayne';
-actors[14] = 'Bill Pullman';
+actors[9] = 'William Shatner';
+actors[10] = 'Leonard Nemoy';
+actors[11] = 'Rick Moranis';
+actors[12] = 'Sharon Stone';
+actors[13] = 'Kirk Douglas';
+actors[14] = 'Michael Douglas';
 
 	console.log("hello" + actors.length);
 
